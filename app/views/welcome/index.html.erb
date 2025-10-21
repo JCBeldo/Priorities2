@@ -1,0 +1,12 @@
+<% if !current_user %>
+  <%= "Log in with Google" %>
+  <%= link_to "Login", "/auth/google_oauth2", class: "py-1 px-10 bg-transparent text-black font-semibold border border-black  hover:bg-black hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0 mb-4 " %>
+  
+  <br>
+  <%= "Don't want to use Google?" %>
+  <%= link_to "Kenny Loggins", login_path %>
+  
+  <br>
+  <%= "Don't have an account at all?" %>
+  <%= link_to "Sign Up", new_user_path %>
+<% end %>
