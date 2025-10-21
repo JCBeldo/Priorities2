@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "welcome#index"
 
+  resources :users, only: [:new, :create]
   get "/login", to: "users#login_form", as: "login"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
