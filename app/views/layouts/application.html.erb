@@ -23,6 +23,10 @@
   </head>
 
   <body>
-    <%= yield %>
+  <% flash.each do |type, msg| %>
+    <%= content_tag :div, msg, class: type, style: "color:red; margin-left:30px; font-size:30px;" %>
+      <%#= msg %>
+  <% end %>
+  <%= yield %>
   </body>
 </html>
