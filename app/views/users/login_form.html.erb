@@ -1,7 +1,7 @@
 <%= "Already have an account?" %>
 <%= form_with url: login_path, method: :post do |f| %>
-  <%= f.label :name, "Username" %>
-  <%= f.text_field :name %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
   <%= f.label :password, "Password" %>
   <%= f.text_field :password %>
  
