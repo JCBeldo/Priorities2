@@ -7,15 +7,13 @@ RSpec.describe "Logging In", type: :feature do
     it 'Allows user to log in successfully' do
 
       visit root_path
-
+      
       click_on "Kenny Loggins"
-      
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-      
+            
       expect(current_path).to eq(login_path)
       expect(page).to have_content("Already have an account?")
       
-      fill_in :name, with: user.name
+      fill_in :email, with: user.email
       fill_in :password, with: user.password
       click_on "Log In"
       # save_and_open_page
@@ -26,12 +24,12 @@ RSpec.describe "Logging In", type: :feature do
     
     it "It doesn't allow a log in with bad credentials" do
       
-      user = User.create(name: "Cutie",
-      email: "fern@gully.com",
-      password: "password",
-      google_id: '',
-      token: '',
-      role: 0)
+      # user = User.create!(name: "Cutie",
+      # email: "fern@gully.com",
+      # password: "password",
+      # google_id: '',
+      # token: '',
+      # role: 0)
       
       visit root_path
       
@@ -39,7 +37,7 @@ RSpec.describe "Logging In", type: :feature do
             
       expect(current_path).to eq(login_path)
       
-      fill_in :name, with: user.name
+      fill_in :email, with: user.email
       fill_in :password, with: "user.password"
       click_on "Log In"
 
