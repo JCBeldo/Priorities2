@@ -19,17 +19,10 @@ RSpec.describe "Logging In", type: :feature do
       # save_and_open_page
       expect(page).to have_content("Welcome #{user.name}")
       # expect(session[:user_id]).to eq(user.id)
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(user_path(user))
     end
     
     it "It doesn't allow a log in with bad credentials" do
-      
-      # user = User.create!(name: "Cutie",
-      # email: "fern@gully.com",
-      # password: "password",
-      # google_id: '',
-      # token: '',
-      # role: 0)
       
       visit root_path
       
