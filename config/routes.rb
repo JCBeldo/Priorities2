@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post "/login", to: "users#login"
   
   resources :users, only: [:create, :new, :show]
+  resources :submissions, only: [:create, :new, :show]
   resources :sessions, only: [:create, :destroy]
   
 
