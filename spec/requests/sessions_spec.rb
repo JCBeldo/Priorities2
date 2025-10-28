@@ -9,7 +9,7 @@ RSpec.describe "Session management", type: :request do
         post "/login", params: { email: "jane@example.com", password: "password" }
 
         expect(session[:user_id]).to eq(user.id)
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(user_path(user))
         expect(flash[:success]).to eq("Welcome Jane")
       end
     end
