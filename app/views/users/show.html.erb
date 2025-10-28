@@ -1,0 +1,17 @@
+<body style="background-image:linear-gradient(to bottom, #8c1450ff, #f39e49ff);">
+<p>Please submit 5 priorities in the five empty boxes. Once all 5 have been submitted you can click a button to take you to your 5 new random priorities.</p>
+<% if @remaining_slots > 0 %>
+  <p> You have submitted <b style="color:red; font-size:115%;"><%= @submissions.count %></b> out of 5 entries.</p>
+  <%= form_with url: submissions_path, method: :post, local: true do |f| %>
+    <% @remaining_slots.times do |i| %>
+      <%= label_tag "Submission #{i+1}" %>
+      <li><%= text_area_tag "submissions[][content]" %></li>
+    <% end %>
+      <%= f.submit "Submit Entries" %>
+  <% end %>
+<% else %>
+  <p>You have completed your 5 submissions.</p>
+  <%= button_to "Go see your new priorties!", submission_path(@submissions), style: "border-radius: 50%; padding:2%; background-color:orange; font-size:15px; color:white; cursor:pointer " %>
+<% end %>
+</body>
+      <%#= require "pry"; binding.pry /%>

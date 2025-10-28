@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome #{user.name}"
       session[:user_id] = user.id
 
-      redirect_to root_path
+      redirect_to user_path(user)
     else
       flash[:alert] = "Sorry, wrong credentials"
 
@@ -31,7 +31,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find_by(name: params[:name])
+    @user = User.find(params[:id])
+    @submissions = @user.submissions
+    @remaining_slots = 5 - @submissions.count
   end
 
   private
