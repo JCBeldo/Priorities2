@@ -26,6 +26,8 @@
   <% if current_user %>
     <%= button_to "Log Out", session_path(current_user), method: :delete %>
   <% end %>
+  <h1><center>PRIORITIES</center></h1>
+  <center><img src="https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/15827487/Screen_Shot_2016-05-31_at_5.06.18_PM.0.0.1464728812.png?quality=90&strip=all&crop=0,4.2619542619543,100,91.476091476091" alt="Geese flying" height="300px"></center>
   <% flash.each do |type, msg| %>
     <%= content_tag :div, msg, class: type, style: "color:red; margin-left:30px; font-size:30px;" %>
       <%#= msg %>
