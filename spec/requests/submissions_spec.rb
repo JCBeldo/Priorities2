@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Submissions", type: :request do
   let(:user) { create(:user) }
+        # require 'pry'; binding.pry
 
   before(:each) do
-  allow_any_instance_of(ApplicationController)
-    .to receive(:current_user).and_return(user)
+  post "/login", params: { email: user.email, password: user.password }
   end
 
   describe "POST /submissions" do
@@ -19,13 +19,11 @@ RSpec.describe "Submissions", type: :request do
         }
       end
 
-      xit "creates multiple submissions for the current user" do
-        expect {
-          post submissions_path, params: valid_params
-        }.to change { user.submissions.count }.by(2)
+      it "creates multiple submissions for the current user" do
+        post submissions_path, params: valid_params
+        expect(user.submissions.count).to eq(2)
       end
-
-      xit "redirects back to the user's show page" do
+      it "redirects back to the user's show page" do
         post submissions_path, params: valid_params
         expect(response).to redirect_to(user_path(user))
       end
@@ -41,7 +39,7 @@ RSpec.describe "Submissions", type: :request do
         }
       end
 
-      xit "does not create any submissions" do
+      it "does not create any submissions" do
         expect {
           post submissions_path, params: invalid_params
         }.not_to change { user.submissions.count }

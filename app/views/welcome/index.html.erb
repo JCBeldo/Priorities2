@@ -1,3 +1,4 @@
+<body style="background-image: url(https://www.pngfind.com/pngs/m/69-696162_download-goose-png-images-background-brant-goose-transparent.png);">
 <% if !current_user %>
   <%= "Log in with Google" %>
   <%= link_to "Login", "/auth/google_oauth2", class: "py-1 px-10 bg-transparent text-black font-semibold border border-black  hover:bg-black hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0 mb-4 " %>
@@ -13,3 +14,4 @@
 <% elsif current_user %>
   <%/= button_to "Log Out", session_path(current_user), method: :delete /%>
 <% end %>
+</body>
