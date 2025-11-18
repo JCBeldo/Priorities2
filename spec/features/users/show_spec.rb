@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Users Show Page", type: :feature do
   let(:user) { create(:user) }
+  let(:user1) { create(:user) }
 
   before(:each) do
   allow_any_instance_of(ApplicationController)
@@ -34,23 +35,50 @@ RSpec.describe "Users Show Page", type: :feature do
     end
   end
 
-  context "when the user has already submitted 5 entries" do
+  context "when the user has already submitted 5 entries, but others haven't" do
     before(:each) do
       create_list(:submission, 5, user: user)
       visit user_path(user)
     end
 
-    it "shows a completion message" do
-      expect(page).to have_content("You have completed your 5 submissions.")
+    it "shows a pending message" do
+      expect(page).to have_content("Waiting for other players to finish their submissions...")
     end
 
     it "does not show the submission form" do
-      save_and_open_page
+      # save_and_open_page
+      expect(page).not_to have_selector("form#new_submissions_form")
+    end
+
+    it "should show a button to visit submissions show page" do
+      expect(page).to_not have_button("Go see your new priorties!")
+    end
+  end
+
+  context "when the user has already submitted 5 entries, as well as others" do
+    before(:each) do
+      create_list(:submission, 5, user: user)
+      create_list(:submission, 5, user: user1)
+      visit user_path(user)
+    end
+
+    it "shows a completion message" do
+      expect(page).to have_content("All players have completed their 5 submissions.")
+    end
+
+    it "does not show the submission form" do
+      # save_and_open_page
       expect(page).not_to have_selector("form#new_submissions_form")
     end
 
     it "should show a button to visit submissions show page" do
       expect(page).to have_button("Go see your new priorties!")
+    end
+
+    it "creates a new submission set on click" do
+      expect {
+        click_button "Go see your new priorties!"
+      }.to change(SubmissionSet, :count).by(1)
     end
   end
 end
