@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :submissions
-  has_many :submission_sets
+  has_many :submission_sets, foreign_key: :owner_id
 
   validates :name, uniqueness: true, presence: true
   validates :password, presence: true

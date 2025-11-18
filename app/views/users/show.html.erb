@@ -1,3 +1,24 @@
+<p id="bank-status"></p>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    const status = document.getElementById("bank-status");
+    const check = async () => {
+      const res = await fetch(`/bank_ready?user_id=<%= @user.id %>`);
+      const data = await res.json();
+      if (data.ready) {
+        status.innerHTML = `<form action="/submission_sets" method="post">
+                              <input type="hidden" name="user_id" value="<%= @user.id %>">
+                              <input type="submit" value="Create Random Set">
+                            </form>`;
+      } else {
+        setTimeout(check, 5000); // retry in 5 seconds
+      }
+    };
+    check();
+  });
+</script>
+
 <body style="background-image:linear-gradient(to bottom, #8c1450ff, #f39e49ff);">
 <% if @user.name == "Tess" %>
   <%= image_tag "https://media.tenor.com/agwIFtE6dbYAAAAM/looney-tunes-love.gif" %>
@@ -16,8 +37,18 @@
       <%= f.submit "Submit Entries" %>
   <% end %>
 <% else %>
-  <p>You have completed your 5 submissions.</p>
-  <%= button_to "Go see your new priorties!", submissions_path, method: :get, style: "border-radius: 50%; padding:2%; background-color:orange; font-size:15px; color:white; cursor:pointer " %>
+<% if @user.submissions.count == 5 %>
+  <% if Submission.where.not(user_id: @user.id).count >= 5 %>
+    <%#= button_to "Create Random Set", submission_sets_path(user_id: @user.id), method: :post %>
+    <p>All players have completed their 5 submissions.</p>
+    <%= button_to "Go see your new priorties!", submission_sets_path(user_id: @user.id), method: :post, style: "border-radius: 50%; padding:2%; background-color:orange; font-size:15px; color:white; cursor:pointer " %>
+  <% else %>
+    <p style="color:white; font-size:22px;">Waiting for other players to finish their submissions...</p>
+  <% end %>
+<% else %>
+  <p>Please complete your 5 submissions first.</p>
+<% end %>
+
 <% end %>
 </body>
       <%#= require "pry"; binding.pry /%>
