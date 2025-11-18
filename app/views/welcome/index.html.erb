@@ -1,17 +1,21 @@
-<body style="background-image: url(https://www.pngfind.com/pngs/m/69-696162_download-goose-png-images-background-brant-goose-transparent.png);">
-<% if !current_user %>
-  <%= "Log in with Google" %>
-  <%= link_to "Login", "/auth/google_oauth2", class: "py-1 px-10 bg-transparent text-black font-semibold border border-black  hover:bg-black hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0 mb-4 " %>
-  
-  <br>
-  <%= "Don't want to use Google?" %>
-  <%= link_to "Kenny Loggins", login_path %>
-  
-  <br>
-  <%= "Don't have an account at all?" %>
-  <%= link_to "Sign Up", new_user_path %>
+<body> 
+<h1 style="background-image: url(https://lh6.googleusercontent.com/proxy/Zj47szhYjEn4yGDdc-vxvGk9bQtdkYpkGJ77d1ZDbsbHqyz6vFav8QKQKFRGXLBSre4LyO3t9XA08Wbl5IcqnhsfFzK12d3gJ3t2ucmXurdyQdp_69PkiiLGkg); opacity:50%;"></h1>
+  <div style="border:2px solid Tomato; background-color:rgba(255, 99, 71, 0.5);">
+    <% if !current_user %>
+      <%#= "Log in with Google" %>
+      <%#= link_to "Login", "/auth/google_oauth2", class: "py-1 px-10 bg-transparent text-black font-semibold border border-black  hover:bg-black hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0 mb-4 " %>
+      
+      <br>
+      <%= "Private Login" %>
+      <%= link_to "Kenny Loggins", login_path %>
+      
+      <br>
+      <%= "Get your priorities straight and" %>
+      <%= link_to "Sign Up", new_user_path %>
 
-<% elsif current_user %>
-  <%/= button_to "Log Out", session_path(current_user), method: :delete /%>
-<% end %>
+    <% elsif current_user %>
+      <%/= button_to "Log Out", session_path(current_user), method: :delete /%>
+    <% end %>
+  </div>
+
 </body>
