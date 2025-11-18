@@ -1,0 +1,29 @@
+<style>
+.sortable-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  cursor: grab;
+  background-color: grey;
+}
+.sortable-item:active {
+  cursor: grabbing;
+}
+</style>
+
+<body style="background-color:green">
+<h1 id="silly-status"></h1>
+
+<h1>Arrange the priorities as you see fit.</h1>
+<ol id="sortable-list" data-set-id="<%= @submission_set.id %>">
+<% @submission_set.submission_set_entries.order(:position).each do |entry| %>
+  <li class="sortable-item" data-entry-id="<%= entry.id %>">
+  <b style="font-size:20px; border-color:black;"><%= entry.submission.content %></b>
+  </li>
+<% end %>
+</ol> 
+
+<%= button_tag "Save Order", id: "save-order-button", class: "btn btn-primary", data: { turbo: "false" }, form: nil %>
+
+</body>
+
